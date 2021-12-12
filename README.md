@@ -1,10 +1,10 @@
-![logo.png](/static/logo.png)
+# 吃点啥？
 
-<center><h1>吃点啥？</h1></center>
+![logo.png](/static/logo.png)
 
 ---
 
-<center><image src="https://img.shields.io/static/v1?label=Organization&message=TrashStation&color=lightgrey&logo=github"></image> | <image src="https://img.shields.io/static/v1?label=Vercel&message=Pages&color=green&logo=vercel"></image> | <image src="https://img.shields.io/static/v1?label=Author&message=Jz0ojiang&color=9cf&logo=github"></image></center>
+![](https://img.shields.io/static/v1?label=Organization&message=TrashStation&color=lightgrey&logo=github") | ![](https://img.shields.io/static/v1?label=Vercel&message=Pages&color=green&logo=vercel") | ![](https://img.shields.io/static/v1?label=Author&message=Jz0ojiang&color=9cf&logo=github")
 
 犹豫不决吃什么？前往 [吃点啥]() 看看有什么好吃的！
 
