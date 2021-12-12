@@ -4,7 +4,7 @@
 
 ---
 
-![](https://img.shields.io/static/v1?label=Organization&message=TrashStation&color=lightgrey&logo=github") | ![](https://img.shields.io/static/v1?label=Vercel&message=Pages&color=green&logo=vercel") | ![](https://img.shields.io/static/v1?label=Author&message=Jz0ojiang&color=9cf&logo=github")
+![](https://img.shields.io/static/v1?label=Organization&message=TrashStation&color=lightgrey&logo=github) | ![](https://img.shields.io/static/v1?label=Vercel&message=Pages&color=green&logo=vercel) | ![](https://img.shields.io/static/v1?label=Author&message=Jz0ojiang&color=9cf&logo=github)
 
 犹豫不决吃什么？前往 [吃点啥]() 看看有什么好吃的！
 
@@ -20,7 +20,7 @@
 
 Q: 如何增加更多美食？
 
-A: 将食物图片以名称进行命名，直接放置在foods文件夹中即可
+A: 将食物图片以名称进行命名，直接放置在 static/foods 文件夹中即可
 
 **欢迎提交PR丰富美食列表**
 

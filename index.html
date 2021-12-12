@@ -1,179 +1,215 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <!-- import CSS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
-    />
-    <!-- font-awsome -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-    <link rel="shortcut icon" href="static/favicon.png" />
+<head>
+  <meta charset="UTF-8" />
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+  <!-- font-awsome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link rel="shortcut icon" href="static/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <!-- import axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>吃点啥 | trash-station</title>
+</head>
 
-    <!-- import Vue before Element -->
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <!-- import JavaScript -->
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <!-- import axios -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>吃点啥 | trash-station</title>
-  </head>
-  <body>
-    <div id="app">
-      <div id="bg"><br /></div>
-      <el-row>
-        <el-col :xs="0" :sm="2" :md="4" :lg="6" :xl="7"
-          ><div class="empty"><br /></div
-        ></el-col>
-        <el-col :xs="24" :sm="20" :md="16" :lg="12" :xl="10">
-          <el-card class="maincard">
-            <el-image
-              :src="'static/logo.png'"
-              class="logo"
-              width="100%"
-              height="100%"
-            ></el-image>
-            <h1>吃点啥</h1>
+<body>
+  <div id="app">
+    <el-row>
+      <el-col :xs="0" :sm="2" :md="4" :lg="6" :xl="7">
+        <div class="empty"><br /></div>
+      </el-col>
+      <el-col :xs="24" :sm="20" :md="16" :lg="12" :xl="10">
+        <el-card class="maincard">
+          <el-image :src="'static/logo.png'" class="logo" width="100%" height="100%"></el-image>
+          <h1>吃点啥</h1>
 
-            <el-link
-              type="primary"
-              class="fab fa-github"
-              style="font-size: 1em; color: black"
-              href="https://trash-station.github.io/"
-            >
-              trash-station</el-link
-            >
+          <el-link type="primary" style="font-size: 1em; color: black" href="https://trash-station.github.io/">
+            <img src="static/trash-station.png" alt="" style="
+                  width: 1em;
+                  display: inline-block;
+                  vertical-align: middle;
+                " />
+            trash-station
+          </el-link>
 
-            <el-divider></el-divider>
-            <el-image
-              style="width: 250px; height: 250px"
-              :src="showimg"
-              fit="contain"></el-image>
-            <p>{{ showtxt == "" ? randomtype[radio] : showtxt }}</p>
-            <!-- <el-empty
-              :image="showimg"
-              :description='showtxt == "" ? randomtype[radio] : showtxt'
-            ></el-empty> -->
-            <!-- 展示食物图片 -->
-            <!-- 展示食物名字 -->
-            <div class="choice">
-              <el-radio v-model="radio" label="foods">食物</el-radio>
-              <el-radio v-model="radio" label="shops">店铺</el-radio>
+          <el-divider></el-divider>
+          <el-image style="width: 250px; height: 250px" :src="showimg" fit="contain"></el-image>
+          <p>{{ showtxt == "" ? randomtype[radio] : showtxt }}</p>
+          <div class="choice">
+            <el-radio v-model="radio" label="foods" :disabled="!buttoncanuse">食物</el-radio>
+            <el-radio v-model="radio" label="shops" :disabled="!buttoncanuse">店铺</el-radio>
+            <div style="display: inline-block;">
+              <span id="radio">是否显示动画</span>
+              <el-switch v-model="effect" active-color="#13ce66" inactive-color="#606266">
+              </el-switch>
             </div>
-            <!-- p 标签 粗体 灰色 内容为 店铺功能仅为开发者使用（因为送不到） -->
-            <p style="font-weight: bold; color: #a0a0a0; font-size: 0.9em">
-              店铺功能仅为开发者使用（因为送不到）
+          </div>
+          <p style="font-weight: bold; color: #a0a0a0; font-size: 0.9em">
+            店铺功能仅为开发者使用（因为送不到）
+          </p>
+          <el-button type="danger" @click="onstartclick()" :disabled="!buttoncanuse">{{ startbutton }}</el-button>
+          <el-divider></el-divider>
+          <div class="footer">
+            <a href="https://github.com/trash-station" target="_blank" rel="noopener noreferrer"><img
+                src="https://img.shields.io/static/v1?label=Organization&message=TrashStation&color=lightgrey&logo=github"
+                alt="" /></a>
+            <el-divider direction="vertical"></el-divider>
+            <a href="https://im0o.top" target="_blank" rel="noopener noreferrer"><img
+                src="https://img.shields.io/static/v1?label=Author&message=Jz0ojiang&color=9cf&logo=github"
+                alt="" /></a>
+            <el-divider direction="vertical"></el-divider>
+            <a href="https://github.com/trash-station/whattoeat" target="_blank" rel="noopener noreferrer"><img
+                src="https://img.shields.io/static/v1?label=Repository&message=whattoeat&color=green&logo=github"
+                alt="" /></a>
+            <p style="
+                  font-weight: bold;
+                  color: #707070;
+                  font-size: 0.9em;
+                  margin: 20px 0 -10px 0;
+                ">
+              吃点啥基于 Vue.js 开发，使用 Vercel 服务部署<br />如果希望提交图片，请点击上方的
+              Repository 图标提交 Pull Request
             </p>
-            <el-button type="danger" @click="onstartclick()">{{ startbutton }}</el-button>
-            <el-divider></el-divider>
-          </el-card>
-        </el-col>
-        <el-col :xs="0" :sm="2" :md="4" :lg="6" :xl="7"
-          ><div class="empty"><br /></div
-        ></el-col>
-      </el-row>
-    </div>
-  </body>
-    <script>
-      Vue.prototype.$http = axios;
-      new Vue({
-        el: "#app",
-        data: function () {
-          return {
-            radio: "foods",
-            data: {},
-            shoptype: ["meituan","ele"],
-            randomtype: {
-              foods: "点击下方按钮，随机一种食物",
-              shops: "点击下方按钮，随机一个店铺",
-            },
-            showimg: "static/sample.png",
-            showtxt: "",
-            startbutton: "开始随机",
-          };
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :xs="0" :sm="2" :md="4" :lg="6" :xl="7">
+        <div class="empty"><br /></div>
+      </el-col>
+    </el-row>
+  </div>
+</body>
+<script>
+  Vue.prototype.$http = axios;
+  new Vue({
+    el: "#app",
+    data: function () {
+      return {
+        radio: "foods",
+        data: {},
+        shoptype: ["meituan", "ele"],
+        randomtype: {
+          foods: "点击下方按钮，随机一种食物",
+          shops: "点击下方按钮，随机一个店铺",
         },
-        methods: {
-          getdata() {
-            axios.get("/static/listdata.json")
-            .then((res) => {
-              this.data = res.data;
-            })
-            .finally(() => {
-              console.log(this.data);
-            });
-          },
-          onstartclick() {
-            this.startbutton = "换一个";
-            for (let i = 1; i < 21; i++) {
-              setTimeout(() => {
-                if (this.radio === "foods") {
-                  this.showtxt = this.random();
-                  this.showimg = this.data[this.radio][this.showtxt];
-                } else {
-                  result = this.random();
-                  this.showtxt = result[1];
-                  this.showimg = this.data[this.radio]["detail"][result[0]][this.showtxt];
-                } 
-              }, 9000/i >= 2000 ? 2000 : 8000/i);
-            }
-            
+        showimg: "static/sample.png",
+        showtxt: "",
+        startbutton: "开始随机",
+        buttoncanuse: true,
+        effect: true,
+        shopname: {
+          meituan: "美团",
+          ele: "饿了么",
+        },
+      };
+    },
+    methods: {
+      getdata() {
+        axios
+          .get("/static/listdata.json")
+          .then((res) => {
+            this.data = res.data;
+          })
+          .finally(() => {
+            console.log(this.data);
+          });
+      },
+      async onstartclick() {
+        if (this.effect) {
+          this.buttoncanuse = false;
+          this.startbutton = "正在随机...";
+          for (let i = 1; i < 21; i++) {
+            setTimeout(
+              () => {
+                this.random();
+                if (i == 1) {
+                  this.buttoncanuse = true;
+                  this.startbutton = "换一个";
+                }
+              },
+              9000 / i >= 2000 ? 2000 : 8000 / i
+            );
+          }
+        } else {
+          this.random();
+          this.startbutton = "换一个";
+        }
+      },
+      random() {
+        if (this.radio === "foods") {
+          let random = Math.floor(
+            Math.random() * this.data.foods.list.length
+          );
+          this.showtxt = this.data.foods.list[random];
+          this.showimg = this.data[this.radio][this.showtxt];
+        } else if (this.radio === "shops") {
+          let dp = this.shoptype[Math.floor(Math.random() * 2)];
+          let random = Math.floor(Math.random() * this.data.shops[dp].length);
+          this.showtxt = `${this.shopname[dp]}-${this.data.shops[dp][random]}`;
+          this.showimg =
+            this.data[this.radio]["detail"][dp][this.data.shops[dp][random]];
+        }
+      },
+    },
+    created() {
+      this.getdata();
+    },
+  });
+</script>
 
-          },
-          random() {
-            if (this.radio === "foods") {
-              let random = Math.floor(Math.random() * this.data.foods.list.length);
-              return this.data.foods.list[random];
-            } else if (this.radio === "shops") {
-              let dp = this.shoptype[Math.floor(Math.random() * 2)];
-              let random = Math.floor(Math.random() * this.data.shops[dp].length);
-              return [dp,this.data.shops[dp][random]];
-            }
-          },
-        },
-        created() {
-          this.getdata();
-        },
-      });
-    </script>
+<style>
+  .maincard {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 30px;
+    margin-top: 10px;
+    /*background-color: #e0e0e0;*/
+  }
 
-  <style>
-    .maincard {
-      width: 100%;
-      height: 100%;
-      box-sizing: border-box;
-      margin-top: 10px;
-      text-align: center;
-      padding: 30px;
-    }
-    h1 {
-      line-height: 0.5;
-    }
-    .empty {
-      width: 100%;
-      height: 100%;
-      -webkit-touch-callout: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-    #app {
-      width: 100%;
-      height: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-      margin-top: 10px;
-    }
-    body {
-      background-image: url("/static/bg.jpg");
-      font-family: "Helvetica Neue", Helvetica, "PingFang SC",
-        "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    }
-  </style>
+  h1 {
+    line-height: 0.5;
+  }
+
+  .empty {
+    width: 100%;
+    height: 100%;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  #app {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+  }
+
+  body {
+    background-image: url("/static/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  #radio {
+    font-weight: 500;
+    font-size: 14px;
+    color: #606266;
+  }
+</style>
+
 </html>
