@@ -24,6 +24,12 @@ jobs:
     - name: Install dependencies
       run: |
         python ./static/listdata.py
+    - name: commit
+      run: |
+        git config --global user.email jz0ojiang@qq.com
+        git config --global user.name 0ojixueseno0
+        git add .
+        git commit -m "update" -a
     - name: Deploy what2eat to vercel
       uses: peaceiris/actions-gh-pages@v2
       env:
