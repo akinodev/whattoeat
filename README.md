@@ -6,7 +6,7 @@
 
 ![](https://img.shields.io/static/v1?label=Organization&message=TrashStation&color=lightgrey&logo=github) | ![](https://img.shields.io/static/v1?label=Vercel&message=Pages&color=green&logo=vercel) | ![](https://img.shields.io/static/v1?label=Author&message=Jz0ojiang&color=9cf&logo=github)
 
-犹豫不决吃什么？前往 [吃点啥]() 看看有什么好吃的！
+犹豫不决吃什么？前往 [吃点啥](https://what2eat.im0o.top) 看看有什么好吃的！
 
 > 图片素材来源：
 >
